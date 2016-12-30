@@ -28,11 +28,4 @@ export class SessionListComponent {
         item.expanded = !item.expanded;
     }
 
-    public onAddClick(item:ListItem) {
-        this.dm.addToMyAgendaRequest(item.original);
-    }
-
-    public onRemoveClick(item:ListItem) {
-        this.dm.removeFromMyAgendaRequest(item.original);
-    }
 }

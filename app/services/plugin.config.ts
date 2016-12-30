@@ -1,41 +1,31 @@
 import {Injectable} from "@angular/core";
 import {Filter} from "../models/filter-list-of"
 import {Sorting} from "../models/sort-list-of"
-import {AgendaSession} from "../models/agenda-session"
+import {InventoryArticle} from "../models/inventory-article"
 
 export interface PluginOptions {
-    name: string
     mockAJAX: any
 
-    minSessionsInMyAgenda?: number;
-
-    allowNextStep?: () => void;
-    disallowNextStep?: () => void;
+    articles: InventoryArticle[]
 
     filters: Filter[]
     sortings: Sorting[]
-    sessions: AgendaSession[]
 
-    addToMyAgendaUrl: string
-    removeFromMyAgendaUrl: string
+    changeWishUrl: string
+    currencyShortName: string
 }
 
 @Injectable()
 export class PluginConfig {
-    name: string = '';
     mockAJAX: any;
 
-    minSessionsInMyAgenda: number = 0;
-
-    allowNextStep: () => void;
-    disallowNextStep: () => void;
+    articles: InventoryArticle[] = [];
 
     filters: Filter[] = [];
     sortings: Sorting[] = [];
-    sessions: AgendaSession[] = [];
 
-    addToMyAgendaUrl: string = '';
-    removeFromMyAgendaUrl: string = '';
+    changeWishUrl: string = '';
+    currencyShortName: string = '';
 
     translations: any[] = [];
     onTranslate: any;

@@ -20,30 +20,30 @@ export class ValidationService {
     }
 
     public validate() {
-        this.checkMinMyAgendaSessions();
+        //this.checkMinMyAgendaSessions();
     }
 
     /**
      * Check sessions column in MyAgenda and set Next Step button status
      */
-    private checkMinMyAgendaSessions(){
-        this.state.minSessionsInMyAgenda = this.myAgenda.sessions.length >= this.config.minSessionsInMyAgenda;
-        if(this.state.minSessionsInMyAgenda) {
-            this.allowNextStep()
-        } else {
-            this.disallowNextStep()
-        }
-    }
+    // private checkMinMyAgendaSessions(){
+    //     this.state.minSessionsInMyAgenda = this.myAgenda.sessions.length >= this.config.minSessionsInMyAgenda;
+    //     if(this.state.minSessionsInMyAgenda) {
+    //         this.allowNextStep()
+    //     } else {
+    //         this.disallowNextStep()
+    //     }
+    // }
 
-    private allowNextStep(){
-        if('function' === typeof this.config.allowNextStep){
-            this.config.allowNextStep();
-        }
-    }
-
-    private disallowNextStep(){
-        if('function' === typeof this.config.disallowNextStep){
-            this.config.disallowNextStep();
-        }
-    }
+    // private allowNextStep(){
+    //     if('function' === typeof this.config.allowNextStep){
+    //         this.config.allowNextStep();
+    //     }
+    // }
+    //
+    // private disallowNextStep(){
+    //     if('function' === typeof this.config.disallowNextStep){
+    //         this.config.disallowNextStep();
+    //     }
+    // }
 }

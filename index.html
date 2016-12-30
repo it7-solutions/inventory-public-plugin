@@ -75,11 +75,11 @@
         }
 
         var options = {
-            name: 'bebebe',
-            mockAJAX: mockAjax,
+            //mockAJAX: mockAjax,
+            mockAJAX: false,
 
-            addToMyAgendaUrl: '/add',
-            removeFromMyAgendaUrl: '/remove',
+            changeWishUrl: '/changeWish',
+            currencyShortName: 'USD',
             filters: [
                 {
                     key: 'cantons',
@@ -116,34 +116,25 @@
                     fieldName: 'cantonKey'
                 }
             ],
-            sessions: [
+            articles: [
                 {
                     id: '1',
-                    name: 'First session Jura FR',
-                    languageKey: 'fr',
-                    cantonKey: 'JU',
-                    isInAgenda: false,
-                    isCanAdd: false,
-                    isCanRemove: false
+                    name: 'Table',
+                    description: 'Cool big table',
+                    price: 100
                 },
                 {
-                    id: '2',
-                    name: 'Second session Zug EN',
-                    languageKey: 'en',
-                    cantonKey: 'ZG',
-                    isInAgenda: true,
-                    isCanAdd: false,
-                    isCanRemove: true
+                    id: '20',
+                    name: 'TV',
+                    description: 'Cool big TV "Berezka"',
+                    price: 1000
                 }
             ],
             translations:[
-                {code: 'sessions', value: '-Sessions-'},
-                {code: 'bebebe', value: '-Bebebe-'}
+                {code: 'wishes', value: '-Wishes-'},
+                {code: 'orders', value: '-Orders-'}
             ],
-            onTranslate: function(){},
-            allowNextStep: function(){console.log('Next Step ON')},
-            disallowNextStep: function(){console.log('Next Step OFF')},
-            minSessionsInMyAgenda: 1
+            onTranslate: function(){}
         };
 
 

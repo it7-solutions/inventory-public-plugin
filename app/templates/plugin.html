@@ -1,19 +1,16 @@
-<h2>Plugin</h2>
+<h2>Inventory public plugin</h2>
 
-<my-agenda-list [myAgenda]="myAgenda"></my-agenda-list>
+<div class="tabControl" (click)="onWishesClick()" [ngClass]="{'current': wishesTabVisible}">{{ 'Wishes'|translation }}</div>
+<div class="tabControl" (click)="onOrdersClick()" [ngClass]="{'current': ordersTabVisible}">{{ 'Orders'|translation }}</div>
 
-<select data-key="cantons" (change)="onFilterChange($event)" [(ngModel)]="filters.filtersByKey.cantons.value">
-    <option *ngFor="let option of filters.filtersByKey.cantons.values" [value]="option.key">{{option.label}}</option>
-</select>
+<wishes *ngIf="wishesTabVisible"></wishes>
+<orders *ngIf="ordersTabVisible"></orders>
 
-<select data-key="languages" (change)="onFilterChange($event)" [(ngModel)]="filters.filtersByKey.languages.value">
-    <option *ngFor="let option of filters.filtersByKey.languages.values" [value]="option.key">{{option.label}}</option>
-</select>
-
-<div (click)="onChooseCantonClick()" >Choose canton on Map</div>
-
-<session-list [sortings]="sortings" [sessionList]="sessionList"></session-list>
-
-<div *ngIf="!validationState.minSessionsInMyAgenda">You must choose more sessions</div>
-
-<busy-popup></busy-popup>
+<style>
+    .tabControl {
+        cursor: pointer;
+    }
+    .tabControl.current {
+        font-weight: bold;
+    }
+</style>

@@ -6,8 +6,12 @@ import {It7ErrorService} from "./it7-error.service";
 import {It7AjaxService} from './it7-ajax.service'
 import {PopupService} from "./popup.service";
 import {BusyPopup} from "../components/busy-popup.component";
-import {AgendaSessionsService} from "./agenda-sessions.service";
-import {MyAgendaService} from "./my-agenda.service";
+import {InventoryArticlesService} from "./inventory-articles.service";
+import {InventoryWishesService} from "./inventory-wishes.service";
+import {InventoryOrdersService} from "./inventory-orders.service";
+import {InventoryOrderItemsService} from "./inventory-order-irems.service";
+import {InventoryOrderItem} from "../models/inventory-order-item";
+import {InventoryOrder} from "../models/inventory-order";
 
 
 @Injectable()
@@ -19,22 +23,24 @@ export class DataManagerService {
         private err: It7ErrorService,
         private it7Ajax: It7AjaxService,
         private popupService: PopupService,
-        private agendaSessions: AgendaSessionsService,
-        private myAgenda: MyAgendaService
+        private articles: InventoryArticlesService,
+        private wishes: InventoryWishesService,
+        private orders: InventoryOrdersService,
+        private orderItems: InventoryOrderItemsService
     ){
-        // Init Sessions from config
-        this.agendaSessions.update(this.config.sessions);
+        // Init Articles from config
+        this.articles.update(this.config.articles);
 
         // Create MyAgenda from sessions
-        this.myAgenda.updateFromSessions(this.agendaSessions.sessions);
+        //this.myAgenda.updateFromSessions(this.agendaSessions.sessions);
     }
 
 
-    addToMyAgendaRequest(data: Object){
+    updateData() {
         this.showLoading();
-        data = JSON.stringify(data);
+        let data = JSON.stringify({});
         return this.it7Ajax
-            .post(this.config.addToMyAgendaUrl, {data})
+            .post(this.config.changeWishUrl, {data})
             .then(
                 res => {
                     this.hideLoading();
@@ -44,11 +50,11 @@ export class DataManagerService {
             )
     }
 
-    removeFromMyAgendaRequest(data: Object){
+    changeWish(data: Object) {
         this.showLoading();
         data = JSON.stringify(data);
         return this.it7Ajax
-            .post(this.config.removeFromMyAgendaUrl, {data})
+            .post(this.config.changeWishUrl, {data})
             .then(
                 res => {
                     this.hideLoading();
@@ -61,19 +67,77 @@ export class DataManagerService {
     // -- Private
 
     private checkAndUpdateList(res: any){
-        if(res && 'string' === typeof res.status && 'ok' !== res.status.toLowerCase()) {
-            if(res.message){
-                this.err.fire(res.message);
-            } else {
-                this.err.fire('Request to the server was not satisfied. Status ' + res.status);
-            }
-        }
-        if(res && Array.isArray(res.data)) {
-            this.agendaSessions.update(res.data as any);
-            this.myAgenda.updateFromSessions(this.agendaSessions.sessions);
+        console.log('checkAndUpdateList', res);
+        // if(res && 'string' === typeof res.status && 'ok' !== res.status.toLowerCase()) {
+        //     if(res.message){
+        //         this.err.fire(res.message);
+        //     } else {
+        //         this.err.fire('Request to the server was not satisfied. Status ' + res.status);
+        //     }
+        // }
+        if (res && Array.isArray(res.wishes) && Array.isArray(res.orders) && Array.isArray(res.order_items)) {
+            this.wishes.update(res.wishes as any);
+            this.orders.update(res.orders as any);
+            this.orderItems.update(res.order_items as any);
+            this.updateArticles();
         } else {
-            this.err.fire('Parse error: Incompatible session list format.');
+            this.err.fire('Parse error: Incompatible format wishes or orders.');
         }
+    }
+
+    private updateArticles() {
+        // Index Articles
+        // Clear link for Wishes and OrderItems
+        let articlesById = {};
+        this.articles.list.forEach(a => {
+            articlesById[a.id] = a;
+            a._wishes = [];
+            a._orderItems = [];
+        });
+        // Index Orders
+        let ordersById = {};
+        this.orders.list.forEach(o => {
+            ordersById[o.id] = o;
+        });
+
+
+        // Insert Wish link into Articles
+        this.wishes.list.forEach(w => {
+            let article = articlesById[w.article_id];
+            if (article) {
+                article._wishes.push(w);
+            } else {
+                this.err.fire('Parse error: Wish #' + w.id + ' related to nonexistent Article #' + w.article_id + '.');
+            }
+        });
+
+        // Insert Article link into OrderItem
+        // Insert OrderItems link into Article
+        // Insert OrderItems link into Order
+        this.orderItems.list.forEach(oi => {
+            // Insert links
+            // Article to OrderItem and OrderItem to Article
+            let article = articlesById[oi.article_id];
+            if (article) {
+                // To OrderItem
+                oi._article = article;
+                // To Article
+                article._orderItems.push(oi);
+            } else {
+                this.err.fire('Parse error: OrderItem #' + oi.id + ' related to nonexistent Article #' + oi.article_id + '.');
+            }
+            // Insert link
+            // OrderItem to Order
+            let order: InventoryOrder = ordersById[oi.order_id];
+            if (order) {
+                order._orderItems.push(oi);
+            } else {
+                this.err.fire('Parse error: OrderItem #' + oi.id + ' related to nonexistent Order #' + oi.order_id + '.');
+            }
+        });
+
+        // Send signal - Articles updated
+        this.articles.fireUpdate();
     }
 
     private showLoading(){
