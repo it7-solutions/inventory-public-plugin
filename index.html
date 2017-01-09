@@ -79,28 +79,18 @@
             mockAJAX: false,
 
             changeWishUrl: '/changeWish',
+            getDataUrl: '/getData',
+            preorderConfirmationUrl: 'http://google.com',
             currencyShortName: 'USD',
             filters: [
                 {
-                    key: 'cantons',
+                    key: 'myWishesOnly',
                     label: '',
-                    fieldName: 'cantonKey',
-                    value: 'ju',
+                    fieldName: '_isMyWish',
+                    value: '',
                     values: [
-                        {label: 'All cantons', key: ''},
-                        {label: 'Jura', key: 'ju'},
-                        {label: 'Zug', key: 'zg'},
-                        {label: 'Zürich', key: 'zh'}
-                    ]
-                },
-                {
-                    key: 'languages',
-                    label: '',
-                    fieldName: 'languageKey',
-                    values: [
-                        {label: 'All languages', key: ''},
-                        {label: 'English', key: 'en'},
-                        {label: 'French', key: 'fr'}
+                        {label: 'All articles', key: ''},
+                        {label: 'My wishes only', key: 'yes'}
                     ]
                 }
             ],
@@ -128,6 +118,12 @@
                     name: 'TV',
                     description: 'Cool big TV "Berezka"',
                     price: 1000
+                },
+                {
+                    id: '21',
+                    name: 'Ace of spades',
+                    description: 'True Ace',
+                    price: 90000
                 }
             ],
             translations:[

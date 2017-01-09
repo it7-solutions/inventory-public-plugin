@@ -3,11 +3,7 @@ import {PluginConfig} from "../services/plugin.config";
 import {ListOf, ListItem} from "../models/list-of";
 import {FilterListOf, Filter} from "../models/filter-list-of";
 import {SortListOf} from '../models/sort-list-of';
-import {AgendaSessionsService} from "../services/agenda-sessions.service";
-import {MyAgendaService} from "../services/my-agenda.service";
-import {AgendaSession} from "../models/agenda-session";
 import {It7ErrorService} from "../services/it7-error.service";
-import {ValidationService} from '../services/validation.service';
 import {InventoryArticlesService} from "../services/inventory-articles.service";
 import {InventoryArticle} from "../models/inventory-article";
 import {DataManagerService} from "../services/data-manager.service";
@@ -20,6 +16,7 @@ import {InventoryWish} from "../models/inventory-with";
 })
 export class WishesComponent {
     private articleList: ListOf;
+    private filters:FilterListOf;
 
     constructor(private config: PluginConfig,
                 private err: It7ErrorService,
@@ -28,11 +25,28 @@ export class WishesComponent {
                 private wishes: InventoryWishesService
     ) {
         this.articleList = new ListOf();
+
+        // Init Filters from config
+        this.filters = new FilterListOf();
+        this.filters.add(config.filters);
     }
 
     ngOnInit() {
         this.articles.onUpdate.subscribe(sessions => this.onArticlesUpdate(sessions));
         this.onArticlesUpdate(this.articles.list);
+        console.log(this.config.preorderConfirmationUrl);
+    }
+
+    // From template event
+    public onFilterChange(event:any) {
+        //var select = event.target;
+        var filter = this.filters.filtersByKey['myWishesOnly'];
+        if(filter) {
+            filter.value = filter.value ? '' : 'yes';
+            this.applyFilter();
+        } else {
+            console && console.error && console.error('Not found instance of class "Filter" for changed filter.');
+        }
     }
 
     // From template event
@@ -55,6 +69,10 @@ export class WishesComponent {
 
     private onArticlesUpdate(list: InventoryArticle[]) {
         this.articleList.update(list);
+    }
+
+    private applyFilter(){
+        this.filters.applyToList(this.articleList);
     }
 
     // Call from template

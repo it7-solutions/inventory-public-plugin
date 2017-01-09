@@ -40,7 +40,7 @@ export class DataManagerService {
         this.showLoading();
         let data = JSON.stringify({});
         return this.it7Ajax
-            .post(this.config.changeWishUrl, {data})
+            .post(this.config.getDataUrl, {data})
             .then(
                 res => {
                     this.hideLoading();
@@ -87,10 +87,12 @@ export class DataManagerService {
 
     private updateArticles() {
         // Index Articles
+        // Clear isMyWish flag
         // Clear link for Wishes and OrderItems
         let articlesById = {};
         this.articles.list.forEach(a => {
             articlesById[a.id] = a;
+            a._isMyWish = '';
             a._wishes = [];
             a._orderItems = [];
         });
@@ -102,9 +104,13 @@ export class DataManagerService {
 
 
         // Insert Wish link into Articles
+        // SetUp isMyWish flag (if quantity > 0)
         this.wishes.list.forEach(w => {
             let article = articlesById[w.article_id];
             if (article) {
+                if(w.quantity > 0) {
+                    article._isMyWish = 'yes';
+                }
                 article._wishes.push(w);
             } else {
                 this.err.fire('Parse error: Wish #' + w.id + ' related to nonexistent Article #' + w.article_id + '.');

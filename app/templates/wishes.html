@@ -1,5 +1,6 @@
-<h3>Wishes</h3>
-
+<label><input type="checkbox" (change)="onFilterChange($event)">{{ 'Show only my wish'|translation }}</label>
+<a *ngIf="config.preorderConfirmationUrl" target="_blank"
+   [attr.href]="config.preorderConfirmationUrl">{{ 'Preorder Confirmation'|translation }}</a>
 <table>
     <tr>
         <th>{{ 'Title'|translation }}</th>
@@ -16,9 +17,11 @@
             <td><span title="{{ item.original.description }}">(i)</span></td>
             <td>{{ formatPrice(item.original.price) }}</td>
             <td>
-                <span class="decreaseButton" [ngClass]="{disabled: !item.original.isCanDecrease()}" (click)="onDecreaseClick(item)">[-]</span>
+                <span class="decreaseButton" [ngClass]="{disabled: !item.original.isCanDecrease()}"
+                      (click)="onDecreaseClick(item)">[-]</span>
                 <span>{{ item.original.getWishQuantity() }}</span>
-                <span class="increaseButton" [ngClass]="{disabled: !item.original.isCanIncrease()}" (click)="onIncreaseClick(item)">[+]</span>
+                <span class="increaseButton" [ngClass]="{disabled: !item.original.isCanIncrease()}"
+                      (click)="onIncreaseClick(item)">[+]</span>
             </td>
             <td>{{ formatPrice(item.original.getCost()) }}</td>
             <td>{{ item.original.getOrderedQuantity() }}</td>

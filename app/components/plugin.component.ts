@@ -3,11 +3,7 @@ import {PluginConfig} from "../services/plugin.config";
 import {ListOf} from "../models/list-of";
 import {FilterListOf, Filter} from "../models/filter-list-of";
 import {SortListOf} from '../models/sort-list-of';
-import {AgendaSessionsService} from "../services/agenda-sessions.service";
-import {MyAgendaService} from "../services/my-agenda.service";
-import {AgendaSession} from "../models/agenda-session";
 import {It7ErrorService} from "../services/it7-error.service";
-import {ValidationService} from '../services/validation.service';
 import {DataManagerService} from "../services/data-manager.service";
 
 @Component({

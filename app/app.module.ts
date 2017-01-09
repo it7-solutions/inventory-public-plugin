@@ -14,7 +14,6 @@ import {InventoryWishesService} from "./services/inventory-wishes.service";
 import {InventoryOrdersService} from "./services/inventory-orders.service";
 import {InventoryOrderItemsService} from "./services/inventory-order-irems.service";
 import {BusyPopupComponent} from "./components/busy-popup.component";
-import {ValidationService} from './services/validation.service';
 import {WishesComponent} from './components/wishes.component';
 import {OrdersComponent} from './components/orders.component';
 
@@ -41,11 +40,7 @@ import {OrdersComponent} from './components/orders.component';
         InventoryArticlesService,
         InventoryWishesService,
         InventoryOrdersService,
-        InventoryOrderItemsService,
-        // AgendaSessionsService,
-        // MyAgendaService,
-
-        ValidationService
+        InventoryOrderItemsService
     ]
 })
 export class AppModule {

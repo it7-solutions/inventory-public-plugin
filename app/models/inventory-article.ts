@@ -9,6 +9,7 @@ export class InventoryArticle {
 
     _wishes: InventoryWish[] = [];
     _orderItems: InventoryOrderItem[] = [];
+    _isMyWish: string = '';
 
     constructor(srcData: InventoryArticle) {
         Object.assign(this, srcData);

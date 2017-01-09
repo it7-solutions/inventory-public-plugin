@@ -12,6 +12,10 @@ export interface PluginOptions {
     sortings: Sorting[]
 
     changeWishUrl: string
+    getDataUrl: string
+
+    preorderConfirmationUrl: string
+
     currencyShortName: string
 }
 
@@ -25,6 +29,10 @@ export class PluginConfig {
     sortings: Sorting[] = [];
 
     changeWishUrl: string = '';
+    getDataUrl: string = '';
+
+    preorderConfirmationUrl: string = '';
+
     currencyShortName: string = '';
 
     translations: any[] = [];
