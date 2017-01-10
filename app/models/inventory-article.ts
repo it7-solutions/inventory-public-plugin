@@ -7,6 +7,7 @@ export class InventoryArticle {
     description: string = '';
     price: number = 0; // Price in cents
 
+    _forLiveFilter: string = '';
     _wishes: InventoryWish[] = [];
     _orderItems: InventoryOrderItem[] = [];
     _isMyWish: string = '';
@@ -14,6 +15,7 @@ export class InventoryArticle {
     constructor(srcData: InventoryArticle) {
         Object.assign(this, srcData);
         this.id = '' + this.id;
+        this._forLiveFilter = this.name.toLowerCase();
     }
 
     public getWishQuantity(): number {

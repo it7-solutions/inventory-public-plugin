@@ -16,6 +16,9 @@ export class Filter {
     values: FilterValue[] = [];
     value: string = '';
     label: string = '';
+    operator: string = 'eq';
+
+    _value: string = '';
 
     constructor(filter: Filter) {
         Object.assign(this, filter);
@@ -37,14 +40,18 @@ export class FilterListOf {
     }
 
     public applyToList(list: ListOf) {
-        this.buildActiveFiltersList();
+        this.prepareFilters();
         list.items.map((item: ListItem)=> {
             item.visible = this.isListItemVisible(item)
         })
     }
 
-    private buildActiveFiltersList(){
+    // Convert value as lowercase string
+    // Select only active filters
+    private prepareFilters(){
         this.activeFilters = this.filters.filter((filter: Filter)=> {
+            let strVal = 'string' === typeof filter.value ? filter.value: (filter.value as any).toString();
+            filter._value = strVal.toLocaleLowerCase();
             return !!filter.value
         })
     }
@@ -52,10 +59,20 @@ export class FilterListOf {
     private isListItemVisible(item: ListItem): boolean {
         var notPassed = this.activeFilters.filter((filter: Filter)=> {
             let value = item.original[filter.fieldName];
-            console.log('check', ('string' === typeof value ? value.toLowerCase() : value), filter.value);
-            return ('string' === typeof value ? value.toLowerCase() : value) !== filter.value
+            return !this.isPass(value, filter);
         });
         return !notPassed.length
+    }
+
+    private isPass(value: any, filter:Filter): boolean {
+        switch (filter.operator) {
+            case 'like' :
+                let val = 'string' === typeof value ? value : value.toString();
+                return -1 !== val.indexOf(filter._value);
+
+            default:
+                return ('string' === typeof value ? value.toLowerCase() : value) !== filter.value
+        }
     }
 
     private indexFilters() {
@@ -63,5 +80,9 @@ export class FilterListOf {
         this.filters.forEach((filter) => {
             this.filtersByKey[filter.key] = filter;
         });
+    }
+
+    private escapeRegExp(str: string){
+        return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& - підстановка результату
     }
 }

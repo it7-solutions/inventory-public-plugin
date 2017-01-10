@@ -38,6 +38,19 @@ export class WishesComponent {
     }
 
     // From template event
+    public onKeywordChange(event:any) {
+        var input:any = event.target;
+        console.log(input.value);
+        var filter = this.filters.filtersByKey['forLiveFilter'];
+        if(filter) {
+            filter.value = input.value.toString();
+            this.applyFilter();
+        } else {
+            console && console.error && console.error('Not found instance of class "Filter" for live filter.');
+        }
+    }
+
+    // From template event
     public onFilterChange(event:any) {
         //var select = event.target;
         var filter = this.filters.filtersByKey['myWishesOnly'];
@@ -45,7 +58,7 @@ export class WishesComponent {
             filter.value = filter.value ? '' : 'yes';
             this.applyFilter();
         } else {
-            console && console.error && console.error('Not found instance of class "Filter" for changed filter.');
+            console && console.error && console.error('Not found instance of class "Filter" for My Wish filter.');
         }
     }
 

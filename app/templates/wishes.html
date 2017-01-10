@@ -1,3 +1,4 @@
+<input type="text" placeholder="{{ 'Enter keyword to filter'|translation }}" (keyup)="onKeywordChange($event)" (change)="onKeywordChange($event)">
 <label><input type="checkbox" (change)="onFilterChange($event)">{{ 'Show only my wish'|translation }}</label>
 <a *ngIf="config.preorderConfirmationUrl" target="_blank"
    [attr.href]="config.preorderConfirmationUrl">{{ 'Preorder Confirmation'|translation }}</a>
