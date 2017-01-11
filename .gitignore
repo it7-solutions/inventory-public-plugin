@@ -18,3 +18,4 @@ npm-debug.log
 !typings/typings.d.ts
 !wallaby.js
 !webpack.config.js
+!express/**/*.js
