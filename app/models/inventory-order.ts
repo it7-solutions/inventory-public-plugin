@@ -4,6 +4,8 @@ export class InventoryOrder {
     id: string = '';
 
     status: string = '';
+    total: number = 0;
+    total_formatted: string = '';
     download_invoice_url: string = '';
     download_receipt_url: string = '';
 
@@ -14,8 +16,7 @@ export class InventoryOrder {
         this.id = '' + this.id;
     }
 
-    public getTotalCost(): number {
-        // Return sum of cost all OrderItems
-        return this._orderItems.reduce((s: number, o: InventoryOrderItem) => s + o.getCost(), 0);
+    public getTotalCost(): string {
+        return this.total_formatted;
     }
 }

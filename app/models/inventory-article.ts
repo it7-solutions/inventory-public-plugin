@@ -6,6 +6,7 @@ export class InventoryArticle {
     name: string = '';
     description: string = '';
     price: number = 0; // Price in cents
+    price_formatted: string = '';
 
     _forLiveFilter: string = '';
     _wishes: InventoryWish[] = [];
@@ -23,8 +24,8 @@ export class InventoryArticle {
         return this._wishes.reduce((s: number, o: InventoryOrderItem) => s + o.quantity, 0);
     }
 
-    public getCost(): number {
-        return this.getWishQuantity() * this.price;
+    public getCost(): string {
+        return this._wishes.length > 0 ? this._wishes[0].total_formatted : '';
     }
 
     public getOrderedQuantity(): number {

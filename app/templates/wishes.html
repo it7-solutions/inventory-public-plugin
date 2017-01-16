@@ -15,8 +15,8 @@
     <tbody *ngFor="let item of articleList.items">
         <tr *ngIf="item.visible">
             <td>{{ item.original.name }}</td>
-            <td><span title="{{ item.original.description }}">(i)</span></td>
-            <td>{{ formatPrice(item.original.price) }}</td>
+            <td><span (click)="onArticleDetailsClick($event, item.original)">(i)</span></td>
+            <td>{{ item.original.price_formatted }}</td>
             <td>
                 <span class="decreaseButton" [ngClass]="{disabled: !item.original.isCanDecrease()}"
                       (click)="onDecreaseClick(item)">[-]</span>
@@ -24,7 +24,7 @@
                 <span class="increaseButton" [ngClass]="{disabled: !item.original.isCanIncrease()}"
                       (click)="onIncreaseClick(item)">[+]</span>
             </td>
-            <td>{{ formatPrice(item.original.getCost()) }}</td>
+            <td>{{ item.original.getCost() }}</td>
             <td>{{ item.original.getOrderedQuantity() }}</td>
             <td>{{ item.original.getTotalQuantity() }}</td>
         </tr>
@@ -32,7 +32,7 @@
     <tr>
         <td colspan="3"></td>
         <td>{{ 'Total'|translation }}</td>
-        <td>{{ formatPrice(getTotalCost()) }}</td>
+        <td>{{ getTotalCost() }}</td>
         <td colspan="2"></td>
     </tr>
 </table>

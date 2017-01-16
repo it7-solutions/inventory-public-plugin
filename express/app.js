@@ -15,14 +15,23 @@ var requestAnswer = {
     errorMessage: '',
     data: {
         wishes: [
-            {id: '8', article_id: '1', quantity: 10}
+            {id: '8', article_id: '1', quantity: 10, total: 333, total_formatted: '3.33' }
         ],
+        wishes_total: 99900,
+        wishes_total_formatted: '999.00',
         orders: [
-            {id: '17', status: 'new', download_invoice_url: 'http://google.com', download_receipt_url: 'http://yahoo.com'}
+            {
+                id: '17',
+                status: 'new',
+                download_invoice_url: 'http://google.com',
+                download_receipt_url: 'http://yahoo.com',
+                total: 6100,
+                total_formatted: '61.00'
+            }
         ],
         order_items: [
-            {id: '1', article_id: '1', order_id: '17', quantity: 1},
-            {id: '10', article_id: '20', order_id: '17', quantity: 6}
+            {id: '1', article_id: '1', order_id: '17', quantity: 1, total: 100, total_formatted: '1.00'},
+            {id: '10', article_id: '20', order_id: '17', quantity: 6, total: 6000, total_formatted: '60.00'}
         ]
     }
 };

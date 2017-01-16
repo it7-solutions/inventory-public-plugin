@@ -16,6 +16,7 @@ import {InventoryOrder} from "../models/inventory-order";
 
 @Injectable()
 export class DataManagerService {
+    public wishes_total_formatted: string = '';
     private popup: BusyPopup;
 
     constructor(
@@ -76,6 +77,7 @@ export class DataManagerService {
         //     }
         // }
         if (res && Array.isArray(res.wishes) && Array.isArray(res.orders) && Array.isArray(res.order_items)) {
+            this.wishes_total_formatted = res.wishes_total_formatted;
             this.wishes.update(res.wishes as any);
             this.orders.update(res.orders as any);
             this.orderItems.update(res.order_items as any);

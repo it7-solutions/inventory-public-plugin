@@ -9,6 +9,8 @@ import {InventoryArticle} from "../models/inventory-article";
 import {DataManagerService} from "../services/data-manager.service";
 import {InventoryWishesService} from "../services/inventory-wishes.service";
 import {InventoryWish} from "../models/inventory-with";
+import {PopupService} from "../services/popup.service";
+import {DetailsPopup} from "./details-popup.component";
 
 @Component({
     selector: 'wishes',
@@ -22,7 +24,8 @@ export class WishesComponent {
                 private err: It7ErrorService,
                 private dm: DataManagerService,
                 private articles: InventoryArticlesService,
-                private wishes: InventoryWishesService
+                private wishes: InventoryWishesService,
+                private popupService: PopupService,
     ) {
         this.articleList = new ListOf();
 
@@ -80,6 +83,12 @@ export class WishesComponent {
         }
     }
 
+    // Call from template
+    public onArticleDetailsClick(event: MouseEvent, article: InventoryArticle){
+        console.log(event.x, event.y);
+        this.popupService.showPopup(new DetailsPopup(true, article.description, event.x, event.y));
+    }
+
     private onArticlesUpdate(list: InventoryArticle[]) {
         this.articleList.update(list);
     }
@@ -89,14 +98,8 @@ export class WishesComponent {
     }
 
     // Call from template
-    public formatPrice(price: number): string {
-        return ""+(price/100);
-    }
-
-    // Call from template
-    public getTotalCost(): number {
-        // Return sum of quantity all wished Articles
-        return this.articles.list.reduce((s: number, o: InventoryArticle) => s + o.getCost(), 0);
+    public getTotalCost(): string {
+        return this.dm.wishes_total_formatted;
     }
 
 }

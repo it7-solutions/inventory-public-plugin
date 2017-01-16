@@ -30,9 +30,4 @@ export class OrdersComponent {
     private onArticlesUpdate(list: InventoryOrder[]) {
         this.orderList.update(list);
     }
-
-    // Call from template
-    public formatPrice(price: number): string {
-        return ""+(price/100);
-    }
 }

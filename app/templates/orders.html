@@ -13,14 +13,14 @@
             <tr *ngFor="let orderItem of item.original._orderItems">
                 <td>{{ orderItem._article.name }}</td>
                 <td><span title="{{ orderItem._article.description }}">(i)</span></td>
-                <td>{{ formatPrice(orderItem._article.price) }}</td>
+                <td>{{ orderItem._article.price_formatted }}</td>
                 <td>{{ orderItem.quantity }}</td>
-                <td>{{ formatPrice(orderItem.getCost()) }}</td>
+                <td>{{ orderItem.getCost() }}</td>
             </tr>
             <tr>
                 <td colspan="3"></td>
                 <td>{{ 'Total'|translation }}</td>
-                <td>{{ formatPrice(item.original.getTotalCost()) }}</td>
+                <td>{{ item.original.getTotalCost() }}</td>
             </tr>
         </table>
         <a *ngIf="item.original.download_invoice_url" target="_blank" [attr.href]="item.original.download_invoice_url">{{ 'Download Invoice'|translation }}</a>

@@ -16,6 +16,7 @@ import {InventoryOrderItemsService} from "./services/inventory-order-irems.servi
 import {BusyPopupComponent} from "./components/busy-popup.component";
 import {WishesComponent} from './components/wishes.component';
 import {OrdersComponent} from './components/orders.component';
+import {DetailsPopupComponent} from "./components/details-popup.component";
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import {OrdersComponent} from './components/orders.component';
         WishesComponent,
         OrdersComponent,
         BusyPopupComponent,
+        DetailsPopupComponent,
     ],
     bootstrap: [PluginComponent],
     providers: [
