@@ -45,4 +45,8 @@ export class InventoryArticle {
     public isCanDecrease() {
         return this.getWishQuantity() > 0;
     }
+
+    public isHaveDescription() {
+        return !!this.description;
+    }
 }

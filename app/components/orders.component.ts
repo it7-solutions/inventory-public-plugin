@@ -6,6 +6,9 @@ import {SortListOf} from '../models/sort-list-of';
 import {It7ErrorService} from "../services/it7-error.service";
 import {InventoryOrdersService} from "../services/inventory-orders.service";
 import {InventoryOrder} from "../models/inventory-order";
+import {InventoryArticle} from "../models/inventory-article";
+import {PopupService} from "../services/popup.service";
+import {DetailsPopup} from "./details-popup.component";
 
 @Component({
     selector: 'orders',
@@ -17,7 +20,8 @@ export class OrdersComponent {
     constructor(
         private config: PluginConfig,
         private err: It7ErrorService,
-        private orders: InventoryOrdersService
+        private orders: InventoryOrdersService,
+        private popupService: PopupService,
     ) {
         this.orderList = new ListOf();
     }
@@ -29,5 +33,11 @@ export class OrdersComponent {
 
     private onArticlesUpdate(list: InventoryOrder[]) {
         this.orderList.update(list);
+    }
+
+    // Call from template
+    public onArticleDetailsClick(event: MouseEvent, article: InventoryArticle){
+        console.log(event.x, event.y);
+        this.popupService.showPopup(new DetailsPopup(true, article.description, event.x, event.y));
     }
 }

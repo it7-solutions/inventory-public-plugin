@@ -12,7 +12,7 @@
             </tr>
             <tr *ngFor="let orderItem of item.original._orderItems">
                 <td>{{ orderItem._article.name }}</td>
-                <td><span title="{{ orderItem._article.description }}">(i)</span></td>
+                <td><span *ngIf="orderItem._article.isHaveDescription()" (click)="onArticleDetailsClick($event, orderItem._article)">(i)</span></td>
                 <td>{{ orderItem._article.price_formatted }}</td>
                 <td>{{ orderItem.quantity }}</td>
                 <td>{{ orderItem.getCost() }}</td>

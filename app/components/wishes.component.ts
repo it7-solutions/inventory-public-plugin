@@ -94,6 +94,7 @@ export class WishesComponent {
     }
 
     private applyFilter(){
+        console.log(this.articleList);
         this.filters.applyToList(this.articleList);
     }
 

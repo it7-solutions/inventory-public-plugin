@@ -67,9 +67,9 @@ export class DetailsPopupComponent {
     }
 
     private centerPopup() {
-        // this.styleTop = (this.window.innerHeight - 100) / 2 + "px";
-        // this.styleLeft = (this.window.innerWidth - 100) / 2 + "px";
-        this.styleTop = this.popup.y + "px";
-        this.styleLeft = this.popup.x + "px";
+        this.styleTop = (this.window.innerHeight - 290) / 2 + "px";
+        this.styleLeft = (this.window.innerWidth - 554) / 2 + "px";
+        // this.styleTop = this.popup.y + "px";
+        // this.styleLeft = this.popup.x + "px";
     }
 }

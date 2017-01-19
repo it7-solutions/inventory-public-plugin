@@ -71,7 +71,7 @@ export class FilterListOf {
                 return -1 !== val.indexOf(filter._value);
 
             default:
-                return ('string' === typeof value ? value.toLowerCase() : value) !== filter.value
+                return ('string' === typeof value ? value.toLowerCase() : value) === filter.value
         }
     }
 
