@@ -7,6 +7,7 @@ export class InventoryArticle {
     description: string = '';
     price: number = 0; // Price in cents
     price_formatted: string = '';
+    images_urls: string[] = [];
 
     _forLiveFilter: string = '';
     _wishes: InventoryWish[] = [];

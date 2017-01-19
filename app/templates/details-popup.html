@@ -18,9 +18,31 @@
         background-color: #f8f8f8;
         z-index: 1001;
     }
+
+    .imagePreviewSmall, .imagePreviewSmallImg {
+        width: 100px;
+        height: 100px;
+    }
+    .imagePreviewSmallImg {
+        cursor: pointer;
+    }
 </style>
 <div class="overlay" *ngIf="popup" [style.width]="overlayWidth" [style.height]="overlayHeight"></div>
 <div class="popup" *ngIf="popup" [style.left]="styleLeft" [style.top]="styleTop">
+    <div *ngIf="isShowImages()">
+        <img [attr.src]="getCurrentImageUrl()">
+        <div *ngIf="isShowLotImages()">
+            <div class="imagePreviewSmall"><img
+                    class="imagePreviewSmallImg" *ngIf="getImageUrl(0)"
+                    (click)="onImageClick(0)" [attr.src]="getImageUrl(0)"></div>
+            <div class="imagePreviewSmall"><img
+                    class="imagePreviewSmallImg" *ngIf="getImageUrl(1)"
+                    (click)="onImageClick(1)" [attr.src]="getImageUrl(1)"></div>
+            <div class="imagePreviewSmall"><img
+                    class="imagePreviewSmallImg" *ngIf="getImageUrl(2)"
+                    (click)="onImageClick(2)" [attr.src]="getImageUrl(2)"></div>
+        </div>
+    </div>
     <div [innerHTML]="popup.details"></div>
     <div (click)="onCloseClick()">Close</div>
 </div>

@@ -9,9 +9,8 @@ import {PluginConfig} from "../services/plugin.config";
 export class DetailsPopup extends BasePopup {
     constructor(
         public visible: boolean = true,
-        public details: string,
-        public x: number,
-        public y: number
+        public details: string = '',
+        public images_urls: string[] = []
     ) {
         super('DetailsPopup');
     }
@@ -28,6 +27,7 @@ export class DetailsPopupComponent {
     overlayWidth: string;
     overlayHeight: string;
     window: any;
+    currentImageIndex: number = 0;
 
     constructor(private popupService: PopupService//,
                 //private window: Window
@@ -69,7 +69,32 @@ export class DetailsPopupComponent {
     private centerPopup() {
         this.styleTop = (this.window.innerHeight - 290) / 2 + "px";
         this.styleLeft = (this.window.innerWidth - 554) / 2 + "px";
-        // this.styleTop = this.popup.y + "px";
-        // this.styleLeft = this.popup.x + "px";
+    }
+
+    // Call from template
+    private isShowImages() {
+        return this.popup.images_urls.length > 0;
+    }
+
+    // Call from template
+    private isShowLotImages() {
+        return this.popup.images_urls.length > 1;
+    }
+
+    // Call from template
+    private getImageUrl(i: number): string {
+        return this.popup.images_urls.length > i ? this.popup.images_urls[i] : '';
+    }
+
+    // Call from template
+    private getCurrentImageUrl(): string {
+        let haveThisIndex = this.popup.images_urls.length > this.currentImageIndex;
+        return  haveThisIndex ? this.popup.images_urls[this.currentImageIndex] : '';
+    }
+
+    // Call from template
+    private onImageClick(i: number) {
+        let haveThisIndex = this.popup.images_urls.length > i;
+        this.currentImageIndex = i;
     }
 }

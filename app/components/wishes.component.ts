@@ -86,7 +86,7 @@ export class WishesComponent {
     // Call from template
     public onArticleDetailsClick(event: MouseEvent, article: InventoryArticle){
         console.log(event.x, event.y);
-        this.popupService.showPopup(new DetailsPopup(true, article.description, event.x, event.y));
+        this.popupService.showPopup(new DetailsPopup(true, article.description, article.images_urls));
     }
 
     private onArticlesUpdate(list: InventoryArticle[]) {
