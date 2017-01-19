@@ -16,6 +16,10 @@ export class InventoryArticle {
     constructor(srcData: InventoryArticle) {
         Object.assign(this, srcData);
         this.id = '' + this.id;
+        ('string' !== typeof this.name) && (this.name = '');
+        ('string' !== typeof this.description) && (this.description = '');
+        ('number' !== typeof this.price) && (this.price = 0);
+        ('string' !== typeof this.price_formatted) && (this.price_formatted = '');
         this._forLiveFilter = this.name.toLowerCase();
     }
 
