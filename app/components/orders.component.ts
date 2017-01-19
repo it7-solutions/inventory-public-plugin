@@ -37,6 +37,6 @@ export class OrdersComponent {
 
     // Call from template
     public onArticleDetailsClick(event: MouseEvent, article: InventoryArticle){
-        this.popupService.showPopup(new DetailsPopup(true, article.description, article.images_urls));
+        this.popupService.showPopup(new DetailsPopup(true, article));
     }
 }

@@ -1,16 +1,13 @@
-import {
-    Component, EventEmitter, Input, OnInit, OnDestroy, Output, ViewChild, ElementRef,
-    Renderer
-} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {PopupService, BasePopup} from '../services/popup.service';
 import {PluginConfig} from "../services/plugin.config";
+import {InventoryArticle} from "../models/inventory-article";
 
 export class DetailsPopup extends BasePopup {
     constructor(
         public visible: boolean = true,
-        public details: string = '',
-        public images_urls: string[] = []
+        public article: InventoryArticle
     ) {
         super('DetailsPopup');
     }
@@ -29,8 +26,9 @@ export class DetailsPopupComponent {
     window: any;
     currentImageIndex: number = 0;
 
-    constructor(private popupService: PopupService//,
-                //private window: Window
+    constructor(
+        private config: PluginConfig,
+        private popupService: PopupService
     ) {
         this.window = window;
         this.popupService.popup.subscribe(popup => this.checkPopup(popup));
@@ -73,28 +71,28 @@ export class DetailsPopupComponent {
 
     // Call from template
     private isShowImages() {
-        return this.popup.images_urls.length > 0;
+        return this.popup.article.images_urls.length > 0;
     }
 
     // Call from template
     private isShowLotImages() {
-        return this.popup.images_urls.length > 1;
+        return this.popup.article.images_urls.length > 1;
     }
 
     // Call from template
     private getImageUrl(i: number): string {
-        return this.popup.images_urls.length > i ? this.popup.images_urls[i] : '';
+        return this.popup.article.images_urls.length > i ? this.popup.article.images_urls[i] : '';
     }
 
     // Call from template
     private getCurrentImageUrl(): string {
-        let haveThisIndex = this.popup.images_urls.length > this.currentImageIndex;
-        return  haveThisIndex ? this.popup.images_urls[this.currentImageIndex] : '';
+        let haveThisIndex = this.popup.article.images_urls.length > this.currentImageIndex;
+        return  haveThisIndex ? this.popup.article.images_urls[this.currentImageIndex] : '';
     }
 
     // Call from template
     private onImageClick(i: number) {
-        let haveThisIndex = this.popup.images_urls.length > i;
+        let haveThisIndex = this.popup.article.images_urls.length > i;
         this.currentImageIndex = i;
     }
 }

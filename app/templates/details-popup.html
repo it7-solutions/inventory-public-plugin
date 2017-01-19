@@ -43,6 +43,8 @@
                     (click)="onImageClick(2)" [attr.src]="getImageUrl(2)"></div>
         </div>
     </div>
-    <div [innerHTML]="popup.details"></div>
+    <div>{{ popup.article.name }}</div>
+    <div [innerHTML]="popup.article.description"></div>
+    <div>{{ config.currencyShortName }}: {{ popup.article.price_formatted }}</div>
     <div (click)="onCloseClick()">Close</div>
 </div>
