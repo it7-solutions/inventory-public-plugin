@@ -15,7 +15,7 @@
     <tbody *ngFor="let item of articleList.items">
         <tr *ngIf="item.visible">
             <td>{{ item.original.name }}</td>
-            <td><span *ngIf="item.original.isHaveDescription()" (click)="onArticleDetailsClick($event, item.original)">(i)</span></td>
+            <td><span *ngIf="item.original.isHaveAdditionalInformation()" (click)="onArticleDetailsClick($event, item.original)">(i)</span></td>
             <td>{{ item.original.price_formatted }}</td>
             <td>
                 <span class="decreaseButton" [ngClass]="{disabled: !item.original.isCanDecrease()}"

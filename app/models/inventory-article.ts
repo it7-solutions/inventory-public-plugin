@@ -51,7 +51,7 @@ export class InventoryArticle {
         return this.getWishQuantity() > 0;
     }
 
-    public isHaveDescription() {
-        return !!this.description;
+    public isHaveAdditionalInformation() {
+        return !!this.description || this.images_urls.length > 0;
     }
 }
