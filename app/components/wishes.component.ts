@@ -37,13 +37,11 @@ export class WishesComponent {
     ngOnInit() {
         this.articles.onUpdate.subscribe(sessions => this.onArticlesUpdate(sessions));
         this.onArticlesUpdate(this.articles.list);
-        console.log(this.config.preorderConfirmationUrl);
     }
 
     // From template event
     public onKeywordChange(event:any) {
         var input:any = event.target;
-        console.log(input.value);
         var filter = this.filters.filtersByKey['forLiveFilter'];
         if(filter) {
             filter.value = input.value.toString();
@@ -70,7 +68,6 @@ export class WishesComponent {
         let article: InventoryArticle = item.original;
         if(article.isCanIncrease()){
             this.dm.changeWish({article_id: article.id, quantity: article.getWishQuantity() + 1});
-            console.log('increase', article);
         }
     }
 
@@ -79,22 +76,20 @@ export class WishesComponent {
         let article: InventoryArticle = item.original;
         if(article.isCanDecrease()){
             this.dm.changeWish({article_id: article.id, quantity: article.getWishQuantity() - 1});
-            console.log('decrease', article);
         }
     }
 
     // Call from template
     public onArticleDetailsClick(event: MouseEvent, article: InventoryArticle){
-        console.log(event.x, event.y);
         this.popupService.showPopup(new DetailsPopup(true, article));
     }
 
     private onArticlesUpdate(list: InventoryArticle[]) {
         this.articleList.update(list);
+        this.applyFilter();
     }
 
     private applyFilter(){
-        console.log(this.articleList);
         this.filters.applyToList(this.articleList);
     }
 
