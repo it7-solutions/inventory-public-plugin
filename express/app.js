@@ -30,8 +30,59 @@ var requestAnswer = {
             }
         ],
         order_items: [
-            {id: '1', article_id: '1', order_id: '17', quantity: 1, total: 100, total_formatted: '1.00'},
-            {id: '10', article_id: '20', order_id: '17', quantity: 6, total: 6000, total_formatted: '60.00'}
+            {
+                id: '1',
+                article_id: '1',
+                article_name: 'Table (OI)',
+                price_formatted: "0.10",
+                order_id: '17',
+                quantity: 1,
+                total: 100,
+                total_formatted: '1.00'
+            },
+            {
+                id: '10',
+                article_id: '20',
+                article_name: 'TV (OI)',
+                price_formatted: "9.00",
+                order_id: '17',
+                quantity: 6,
+                total: 6000,
+                total_formatted: '60.00'
+            },
+            {
+                id: '15',
+                type: 'custom',
+                article_name: 'Custom article name',
+                price_formatted: "100.00",
+                article_id: null,
+                order_id: '17',
+                quantity: 1,
+                total: 10000,
+                total_formatted: '100.00'
+            },
+            {
+                id: '17',
+                type: 'article',
+                article_name: 'A-la hidden article',
+                price_formatted: "300.00",
+                article_id: '999999',
+                order_id: '17',
+                quantity: 2,
+                total: 60000,
+                total_formatted: '600.00'
+            },
+            {
+                id: '18',
+                type: 'article',
+                article_name: 'For Limited article',
+                price_formatted: "1.25",
+                article_id: '23',
+                order_id: '17',
+                quantity: 2,
+                total: 250,
+                total_formatted: '2.50'
+            }
         ]
     }
 };

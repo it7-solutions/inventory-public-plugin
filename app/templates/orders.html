@@ -5,15 +5,13 @@
         <table>
             <tr>
                 <th>{{ 'Title'|translation }}</th>
-                <th></th>
                 <th>{{ 'Price'|translation }} ({{ config.currencyShortName }})</th>
                 <th>{{ 'Quantity'|translation }}</th>
                 <th>{{ 'Cost'|translation }} ({{ config.currencyShortName }})</th>
             </tr>
             <tr *ngFor="let orderItem of item.original._orderItems">
-                <td>{{ orderItem._article.name }}</td>
-                <td><span *ngIf="orderItem._article.isHaveAdditionalInformation()" (click)="onArticleDetailsClick($event, orderItem._article)">(i)</span></td>
-                <td>{{ orderItem._article.price_formatted }}</td>
+                <td>{{ orderItem.article_name }}</td>
+                <td>{{ orderItem.price_formatted }}</td>
                 <td>{{ orderItem.quantity }}</td>
                 <td>{{ orderItem.getCost() }}</td>
             </tr>

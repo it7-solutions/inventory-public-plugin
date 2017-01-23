@@ -34,9 +34,4 @@ export class OrdersComponent {
     private onArticlesUpdate(list: InventoryOrder[]) {
         this.orderList.update(list);
     }
-
-    // Call from template
-    public onArticleDetailsClick(event: MouseEvent, article: InventoryArticle){
-        this.popupService.showPopup(new DetailsPopup(true, article));
-    }
 }

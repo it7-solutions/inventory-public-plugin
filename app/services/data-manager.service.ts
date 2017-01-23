@@ -119,20 +119,17 @@ export class DataManagerService {
             }
         });
 
-        // Insert Article link into OrderItem
         // Insert OrderItems link into Article
         // Insert OrderItems link into Order
         this.orderItems.list.forEach(oi => {
-            // Insert links
-            // Article to OrderItem and OrderItem to Article
-            let article = articlesById[oi.article_id];
-            if (article) {
-                // To OrderItem
-                oi._article = article;
-                // To Article
-                article._orderItems.push(oi);
-            } else {
-                this.err.fire('Parse error: OrderItem #' + oi.id + ' related to nonexistent Article #' + oi.article_id + '.');
+            if(oi.isBaseOnArticle()){
+                // Insert links
+                // OrderItem to Article
+                let article = articlesById[oi.article_id];
+                if (article) {
+                    // To Article
+                    article._orderItems.push(oi);
+                }
             }
             // Insert link
             // OrderItem to Order
