@@ -6,6 +6,8 @@ export class InventoryOrder {
     status: string = '';
     total: number = 0;
     total_formatted: string = '';
+    invoice_status_formatted: string = '';
+    order_status_formatted: string = '';
     download_invoice_url: string = '';
     download_receipt_url: string = '';
 
