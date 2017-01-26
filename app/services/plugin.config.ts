@@ -38,6 +38,8 @@ export class PluginConfig {
     translations: any[] = [];
     onTranslate: any;
 
+    lockedAllWishes: boolean = false;
+
     constructor(options: PluginOptions) {
         Object.assign(this, options);
     }

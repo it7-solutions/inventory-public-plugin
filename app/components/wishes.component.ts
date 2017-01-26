@@ -98,4 +98,8 @@ export class WishesComponent {
         return this.dm.wishes_total_formatted;
     }
 
+    public isLockedAllWishes() {
+        return this.config.lockedAllWishes;
+    }
+
 }

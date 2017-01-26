@@ -15,7 +15,7 @@ var requestAnswer = {
     errorMessage: '',
     data: {
         wishes: [
-            {id: '8', article_id: '1', quantity: 10, total: 333, total_formatted: '3.33' }
+            {id: '8', article_id: '1', quantity: 10, total: 333, total_formatted: '3.33', locked: true }
         ],
         wishes_total: 99900,
         wishes_total_formatted: '999.00',

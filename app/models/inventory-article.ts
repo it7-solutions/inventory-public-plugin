@@ -27,7 +27,7 @@ export class InventoryArticle {
 
     public getWishQuantity(): number {
         // Return sum of quantity all Wishes
-        return this._wishes.reduce((s: number, o: InventoryOrderItem) => s + o.quantity, 0);
+        return this._wishes.reduce((s: number, o: InventoryWish) => s + o.quantity, 0);
     }
 
     public getCost(): string {
@@ -45,11 +45,15 @@ export class InventoryArticle {
     }
 
     public isCanIncrease() {
-        return this.max_for_prt > 0 ? this.getTotalQuantity() < this.max_for_prt : true ;
+        let isMaxQuantityOk = this.max_for_prt > 0 ? this.getTotalQuantity() < this.max_for_prt : true ;
+        let isLocked = this._wishes.length > 0 ? this._wishes[0].locked : false;
+        return !isLocked && isMaxQuantityOk;
     }
 
     public isCanDecrease() {
-        return this.getWishQuantity() > 0;
+        let isMinQuantityOk = this.getWishQuantity() > 0;
+        let isLocked = this._wishes.length > 0 ? this._wishes[0].locked : false;
+        return !isLocked && isMinQuantityOk;
     }
 
     public isHaveAdditionalInformation() {

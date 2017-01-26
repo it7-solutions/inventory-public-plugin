@@ -18,10 +18,10 @@
             <td><span *ngIf="item.original.isHaveAdditionalInformation()" (click)="onArticleDetailsClick($event, item.original)">(i)</span></td>
             <td>{{ item.original.price_formatted }}</td>
             <td>
-                <span class="decreaseButton" [ngClass]="{disabled: !item.original.isCanDecrease()}"
+                <span class="decreaseButton" [ngClass]="{disabled: !item.original.isCanDecrease() || isLockedAllWishes()}"
                       (click)="onDecreaseClick(item)">[-]</span>
                 <span>{{ item.original.getWishQuantity() }}</span>
-                <span class="increaseButton" [ngClass]="{disabled: !item.original.isCanIncrease()}"
+                <span class="increaseButton" [ngClass]="{disabled: !item.original.isCanIncrease() || isLockedAllWishes()}"
                       (click)="onIncreaseClick(item)">[+]</span>
             </td>
             <td>{{ item.original.getCost() }}</td>

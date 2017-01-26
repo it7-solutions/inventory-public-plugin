@@ -1,6 +1,7 @@
 export class InventoryWish {
     id: string = '';
 
+    locked: boolean = false;
     article_id: string = '';
     quantity: number = 0;
     total: number = 0;
