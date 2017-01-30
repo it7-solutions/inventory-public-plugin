@@ -45,7 +45,7 @@ export class InventoryArticle {
     }
 
     public isCanIncrease() {
-        let isMaxQuantityOk = this.max_for_prt > 0 ? this.getTotalQuantity() < this.max_for_prt : true ;
+        let isMaxQuantityOk = this.max_for_prt >= 0 ? this.getTotalQuantity() < this.max_for_prt : true ;
         let isLocked = this._wishes.length > 0 ? this._wishes[0].locked : false;
         return !isLocked && isMaxQuantityOk;
     }
