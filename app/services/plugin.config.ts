@@ -7,6 +7,7 @@ export interface PluginOptions {
     mockAJAX: any
 
     articles: InventoryArticle[]
+    categories: any[]
 
     filters: Filter[]
     sortings: Sorting[]
@@ -24,6 +25,7 @@ export class PluginConfig {
     mockAJAX: any;
 
     articles: InventoryArticle[] = [];
+    categories: any[] = [];
 
     filters: Filter[] = [];
     sortings: Sorting[] = [];

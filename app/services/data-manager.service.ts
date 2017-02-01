@@ -29,11 +29,22 @@ export class DataManagerService {
         private orders: InventoryOrdersService,
         private orderItems: InventoryOrderItemsService
     ){
+        this.config.articles.forEach(a => {
+            let category = this.getCategory(a.category_id);
+            console.log('category', category);
+            if(category) {
+                a._categoryName = category.name;
+            }
+        });
         // Init Articles from config
         this.articles.update(this.config.articles);
 
         // Create MyAgenda from sessions
         //this.myAgenda.updateFromSessions(this.agendaSessions.sessions);
+    }
+
+    private getCategory(id: string): any {
+        return this.config.categories.find(c => c.id == id);
     }
 
 

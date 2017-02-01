@@ -9,11 +9,13 @@ export class InventoryArticle {
     price_formatted: string = '';
     images_urls: string[] = [];
     max_for_prt: number = 0;
+    category_id: string = '';
 
     _forLiveFilter: string = '';
     _wishes: InventoryWish[] = [];
     _orderItems: InventoryOrderItem[] = [];
     _isMyWish: string = '';
+    _categoryName: string = '';
 
     constructor(srcData: InventoryArticle) {
         Object.assign(this, srcData);
@@ -22,6 +24,7 @@ export class InventoryArticle {
         ('string' !== typeof this.description) && (this.description = '');
         ('number' !== typeof this.price) && (this.price = 0);
         ('string' !== typeof this.price_formatted) && (this.price_formatted = '');
+        this.category_id = '' + this.category_id;
         this._forLiveFilter = this.name.toLowerCase();
     }
 
