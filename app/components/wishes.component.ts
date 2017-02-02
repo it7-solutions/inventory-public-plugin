@@ -19,6 +19,7 @@ import {DetailsPopup} from "./details-popup.component";
 export class WishesComponent {
     private articleList: ListOf;
     private filters:FilterListOf;
+    public categoryFilter: Filter; // Used in Template
 
     constructor(private config: PluginConfig,
                 private err: It7ErrorService,
@@ -32,10 +33,23 @@ export class WishesComponent {
         // Init Filters from config
         this.filters = new FilterListOf();
         this.filters.add(config.filters);
+        this.categoryFilter = this.filters.filtersByKey['articleCategory'];
+    }
+
+    private prepareCategoryFilter() {
+        let usedCategoryIds = {};
+        this.articles.list.forEach(a => usedCategoryIds[a.category_id] = true);
+        if(this.categoryFilter) {
+            this.categoryFilter.values = this.config.categories.filter(c => usedCategoryIds[c.id]).map(c => {
+                return {key: c.id, label: c.name}
+            } )
+        } else {
+            console && console.error && console.error('Not found instance of class "Filter" for category filter.')
+        }
     }
 
     ngOnInit() {
-        this.articles.onUpdate.subscribe(sessions => this.onArticlesUpdate(sessions));
+        this.articles.onUpdate.subscribe(articles => this.onArticlesUpdate(articles));
         this.onArticlesUpdate(this.articles.list);
     }
 
@@ -49,6 +63,11 @@ export class WishesComponent {
         } else {
             console && console.error && console.error('Not found instance of class "Filter" for live filter.');
         }
+    }
+
+    // From template event
+    public onCategoryFilterChange() {
+        this.applyFilter();
     }
 
     // From template event
@@ -86,6 +105,7 @@ export class WishesComponent {
 
     private onArticlesUpdate(list: InventoryArticle[]) {
         this.articleList.update(list);
+        this.prepareCategoryFilter();
         this.applyFilter();
     }
 

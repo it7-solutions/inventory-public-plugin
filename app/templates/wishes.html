@@ -1,10 +1,15 @@
 <input type="text" placeholder="{{ 'Enter keyword to filter'|translation }}" (keyup)="onKeywordChange($event)" (change)="onKeywordChange($event)">
+<select [(ngModel)]="categoryFilter.value" (ngModelChange)="onCategoryFilterChange()">
+    <option value="">{{ 'All categories'|translation }}</option>
+    <option *ngFor="let item of categoryFilter.values" value="{{ item.key }}">{{ item.label }}</option>
+</select>
 <label><input type="checkbox" (change)="onFilterChange($event)">{{ 'Show only my wish'|translation }}</label>
 <a *ngIf="config.preorderConfirmationUrl" target="_blank"
    [attr.href]="config.preorderConfirmationUrl">{{ 'Preorder Confirmation'|translation }}</a>
 <table>
     <tr>
         <th>{{ 'Title'|translation }}</th>
+        <th>{{ 'Category'|translation }}</th>
         <th></th>
         <th>{{ 'Price'|translation }} ({{ config.currencyShortName }})</th>
         <th>{{ 'Wish qty'|translation }}</th>
@@ -15,6 +20,7 @@
     <tbody *ngFor="let item of articleList.items">
         <tr *ngIf="item.visible">
             <td>{{ item.original.name }}</td>
+            <td>{{ item.original._categoryName }}</td>
             <td><span *ngIf="item.original.isHaveAdditionalInformation()" (click)="onArticleDetailsClick($event, item.original)">(i)</span></td>
             <td>{{ item.original.price_formatted }}</td>
             <td>
