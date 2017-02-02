@@ -10,6 +10,7 @@ export class InventoryArticle {
     images_urls: string[] = [];
     max_for_prt: number = 0;
     category_id: string = '';
+    locked: boolean = false;
 
     _forLiveFilter: string = '';
     _wishes: InventoryWish[] = [];
@@ -48,18 +49,22 @@ export class InventoryArticle {
     }
 
     public isCanIncrease() {
-        let isMaxQuantityOk = this.max_for_prt >= 0 ? this.getTotalQuantity() < this.max_for_prt : true ;
-        let isLocked = this._wishes.length > 0 ? this._wishes[0].locked : false;
+        let isMaxQuantityOk = this.getTotalQuantity() < this.max_for_prt;
+        let isLocked = this.locked || this.wishLocked();
         return !isLocked && isMaxQuantityOk;
     }
 
     public isCanDecrease() {
         let isMinQuantityOk = this.getWishQuantity() > 0;
-        let isLocked = this._wishes.length > 0 ? this._wishes[0].locked : false;
+        let isLocked = this.locked || this.wishLocked();
         return !isLocked && isMinQuantityOk;
     }
 
     public isHaveAdditionalInformation() {
         return !!this.description || this.images_urls.length > 0;
+    }
+
+    private wishLocked(): boolean {
+        return this._wishes.length > 0 ? this._wishes[0].locked : false
     }
 }

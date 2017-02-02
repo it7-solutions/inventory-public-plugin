@@ -121,7 +121,8 @@
                     description: '',
                     price: 100,
                     price_formatted: '1.00',
-                    images_urls: []
+                    images_urls: [],
+                    max_for_prt: 100,
                 },
                 {
                     id: '20',
@@ -130,7 +131,8 @@
                     price: 1000,
                     price_formatted: '10.00',
                     images_urls: ['fixture/0.jpg', 'fixture/1.jpg'],
-                    category_id: 1
+                    category_id: 1,
+                    max_for_prt: 100,
                 },
                 {
                     id: '21',
@@ -138,7 +140,8 @@
                     description: 'Ace',
                     price: 90000,
                     price_formatted: '900.00',
-                    images_urls: ['fixture/0.jpg', 'fixture/1.jpg', 'fixture/2.jpg']
+                    images_urls: ['fixture/0.jpg', 'fixture/1.jpg', 'fixture/2.jpg'],
+                    max_for_prt: 100,
                 },
                 {
                     id: '22',
@@ -147,7 +150,8 @@
                     price: 100,
                     price_formatted: '1.00',
                     images_urls: [],
-                    max_for_prt: 5
+                    max_for_prt: 5,
+                    locked: false
                 },
                 {
                     id: '23',
@@ -157,6 +161,16 @@
                     price_formatted: '2.00',
                     images_urls: [],
                     max_for_prt: 12
+                },
+                {
+                    id: '24',
+                    name: 'Locked article',
+                    description: '',
+                    price: 200,
+                    price_formatted: '2.00',
+                    images_urls: [],
+                    max_for_prt: 100,
+                    locked: true
                 }
             ],
             categories: [
@@ -169,7 +183,7 @@
                 {code: 'wishes', value: '-Wishes-'},
                 {code: 'orders', value: '-Orders-'}
             ],
-            lockedAllWishes: true,
+            lockedAllWishes: false,
             onTranslate: function(){}
         };
 
