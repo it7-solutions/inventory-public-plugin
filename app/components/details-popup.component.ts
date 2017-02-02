@@ -24,7 +24,7 @@ export class DetailsPopupComponent {
     overlayWidth: string;
     overlayHeight: string;
     window: any;
-    currentImageIndex: number = 0;
+    currentImageIndex: number;
 
     constructor(
         private config: PluginConfig,
@@ -50,6 +50,7 @@ export class DetailsPopupComponent {
     }
 
     private showPopup(popup: DetailsPopup) {
+        this.currentImageIndex = 0;
         this.popup = popup;
         this.setOverlay();
         this.centerPopup();
