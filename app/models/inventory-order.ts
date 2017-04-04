@@ -11,6 +11,11 @@ export class InventoryOrder {
     download_invoice_url: string = '';
     download_receipt_url: string = '';
 
+    can_download_invoice: string = '';
+    can_download_receipt: string = '';
+    date: string = '';
+    invoice_date: string = '';
+
     _orderItems: InventoryOrderItem[] = [];
 
     constructor(srcData: InventoryOrder) {
